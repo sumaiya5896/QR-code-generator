@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR_generator</title>
+    <title>QR_generator</title>
+  <style>
+    body {
+      background-color: #f0f0f0;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    .box {
+      background-color: #fff;
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+    input {
+      padding: 10px;
+      font-size: 16px;
+      margin-top: 20px;
+      width: 300px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      margin-top: 20px;
+      cursor: pointer;
+    }
+    button :hover {
+      background-color: #ddd;
+    }
+    img {
+      margin-top: 20px;
+      width: 200px;
+      height: 200px;
+    }
+  </style>
+  </head>  
+<body>
+    <div class="box">
+        <h1>QR Code Generator</h1>
+        <form method="post" >
+            <input type="text" name="qrdata" placeholder="Enter data to encode" required>
+            <button type="submit">Generate QR Code</button>
+        </form>
+    </div>
+    {% if qr_file %}
+    <img src="{{ url_for('static', filename='qr.png') }}" alt="QR Code">
+    {% endif %} 
+</body>
+</html>
