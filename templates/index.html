@@ -48,12 +48,23 @@
     <div class="box">
         <h1>QR Code Generator</h1>
         <form method="post" >
-            <input type="text" name="qrdata" placeholder="Enter data to encode" required>
+            <input type="text" name="qrdata" placeholder="Enter the URL" required>
             <button type="submit">Generate QR Code</button>
         </form>
     </div>
-    {% if qr_file %}
-    <img src="{{ url_for('static', filename='qr.png') }}" alt="QR Code">
+    {% if qr_image %}
+    <h3>Your QR Code is ready!</h3>
+    <img src="data:image/png;base64,{{qr_image}}">
+    <br><br>
+
+    <button onclick="downloadQR()">Download QR Code</button>
+    <script>
+      function downloadQR() {
+        let img=document.getElementById("qr_image");
+        let base64Data=img.src.split(",")[1];
+        window.location.href="data:image/png;base64,"+base64Data;
+      }
+    </script>
     {% endif %} 
-</body>
+  </body>
 </html>
