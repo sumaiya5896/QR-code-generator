@@ -56,6 +56,9 @@
     <h3>Your QR Code is ready!</h3>
     <img src="data:image/png;base64,{{qr_image}}">
     <br><br>
-    {% endif %} 
+    {% if file_url %}
+      <a href="{{file_url}}" download><button type="button">Download QR Code</button></a>
+    {% endif %}
+  {% endif %} 
   </body>
 </html>

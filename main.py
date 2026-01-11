@@ -1,14 +1,16 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request,url_for
 import base64
 import qrcode
 from io import BytesIO
 import os
+import time
+
 app = Flask(__name__)
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
     qr_image=None
-    
+    file_url=None
 
     if request.method == 'POST':
         data = request.form.get('qrdata')
@@ -22,7 +24,18 @@ def home():
             b64=base64.b64encode(buffer.getvalue()).decode("ascii")
             qr_image=b64
 
-    return render_template('index.html', qr_image=qr_image)
+            static_folder=os.path.join(app.root_path, 'static')
+            os.makedirs(static_folder, exist_ok=True)
+
+            filename=f"qr_{int(time.time())}.png"
+            file_path=os.path.join('static',filename)
+
+            with open(file_path,'wb') as f:
+                f.write(buffer.getvalue())
+
+            file_url=url_for('static', filename=filename)
+
+    return render_template('index.html', qr_image=qr_image,file_url=file_url)
 
 if __name__ == '__main__':
     port= int(os.environ.get('PORT', 5000))
