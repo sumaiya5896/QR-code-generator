@@ -53,6 +53,8 @@
         </form>
     </div>
     {% if qr_image %}
+    <h3>Entered data:</h3>
+    <p style="color:rgb(159, 42, 42);font-size:18px;"><strong>{{ data }}</strong></p>
     <h3>Your QR Code is ready!</h3>
     <img src="data:image/png;base64,{{qr_image}}">
     <br><br>

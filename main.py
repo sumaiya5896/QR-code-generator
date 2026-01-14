@@ -35,7 +35,7 @@ def home():
 
             file_url=url_for('static', filename=filename)
 
-    return render_template('index.html', qr_image=qr_image,file_url=file_url)
+    return render_template('index.html', qr_image=qr_image,file_url=file_url,data=data if request.method == 'POST' else None)
 
 if __name__ == '__main__':
     port= int(os.environ.get('PORT', 5000))
